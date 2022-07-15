@@ -5,3 +5,4 @@ int main()
 	Calculator calculator;
 	calculator.run();
 }
+

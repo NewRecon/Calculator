@@ -30,7 +30,8 @@ private:
 public:
 	Calculator();
 	void run();
-
+	std::string calculate(std::string, std::string, short);
+	double strToDouble(std::string);
 private:
 	void evenState();
 	void update();

@@ -77,6 +77,70 @@ void Calculator::run()
 	}
 }
 
+std::string Calculator::calculate(std::string number1, std::string number2, short operation)
+{
+	double num1 = strToDouble(number1);
+	double num2 = strToDouble(number2);
+	double result;
+	switch (operation)
+	{
+	case 1:
+		result = num1 + num2;
+		break;
+	case 2:
+		result = num1 - num2;
+		break;
+	case 3:
+		result = num1 * num2;
+		break;
+	case 4:
+		if (num2 == 0) return "division by 0";
+		else result = num1 / num2;
+		break;
+	}
+
+	field->setStatus(false);
+
+	std::string str = std::to_string(result);
+	return str;
+}
+
+double Calculator::strToDouble(std::string str)
+{
+	double result1 = 0;
+	double result2 = 0;
+	int n = 0;
+	std::string befor = "";
+	std::string after = "";
+	for (int i = 0; str[i] != '.' && str[i] != '\0'; i++)
+	{
+		befor += str[i];
+		n++;
+	}
+	if (str[n] != '\0')
+	{
+		for (int i = n + 1; str[i] != '\0'; i++)
+		{
+			after += str[i];
+		}
+	}
+	for (int i = 0; befor[i] != '\0'; i++)
+	{
+		result1 *= 10;
+		result1 += (befor[i] - 48);
+	}
+	for (int i = 0; after[i] != '\0'; i++)
+	{
+		result2 *= 10;
+		result2 += (after[i] - 48);
+	}
+	result2 *= 10;
+	double result = result1 + result2;
+	result2 *= pow(0.1, size(after));
+
+	return result;
+}
+
 void Calculator::evenState()
 {
 	sf::Event event;
@@ -111,7 +175,11 @@ void Calculator::evenState()
 
 void Calculator::update()
 {
-	
+	if (field->getStat() == true)
+	{
+		std::string str = calculate(field->getNum1(), field->getNum2(), field->getOperation());
+		field->setField(str);
+	}
 }
 
 void Calculator::render()

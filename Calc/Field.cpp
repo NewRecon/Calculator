@@ -8,7 +8,7 @@ Field::Field(float width, float hight) : field(sf::Vector2f(width, hight))
 	}
 	text.setFont(font);
 	text.setFillColor(sf::Color::Black);
-	text.setCharacterSize(48);
+	text.setCharacterSize(32);
 	field.setFillColor(sf::Color::White);
 }
 
@@ -36,4 +36,44 @@ void Field::setPosition(float width, float hight)
 {
 	field.setPosition(width, hight);
 	text.setPosition(width + 10, hight + 10);
+}
+
+void Field::setNum1(std::string num)
+{
+	this->num1 = num;
+}
+
+void Field::setNum2(std::string num)
+{
+	this->num2 = num;
+}
+
+void Field::setOperation(short operation)
+{
+	this->operation = operation;
+}
+
+std::string Field::getNum1()
+{
+	return num1;
+}
+
+std::string Field::getNum2()
+{
+	return num2;
+}
+
+short Field::getOperation()
+{
+	return operation;
+}
+
+void Field::setStatus(bool status)
+{
+	this->status = status;
+}
+
+bool Field::getStat()
+{
+	return status;
 }

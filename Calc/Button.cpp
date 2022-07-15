@@ -33,7 +33,44 @@ sf::Text& Button::getText()
 
 void Button::push(Field* field)
 {
-	field->setField(field->getStatus() + text.getString());
+	std::string str = text.getString();
+	std::string strField = field->getText().getString();
+	if (str == "C") strField = "0";
+	else if (str == "+")
+	{
+		field->setOperation(1);
+		field->setNum1(strField);
+		strField = "0";
+	}
+	else if (str == "-")
+	{
+		field->setOperation(2);
+		field->setNum1(strField);
+		strField = "0";
+	}
+	else if (str == "x")
+	{
+		field->setOperation(3);
+		field->setNum1(strField);
+		strField = "0";
+	}
+	else if (str == "/")
+	{
+		field->setOperation(4);
+		field->setNum1(strField);
+		strField = "0";
+	}
+	else if (str == "=")
+	{
+		field->setNum2(strField);
+		field->setStatus(true);
+	}
+	else
+	{
+		strField += str;
+	}
+	if (strField == "0") strField = "";
+	field->setField(strField);
 }
 
 sf::Vector2f Button::getPos()
